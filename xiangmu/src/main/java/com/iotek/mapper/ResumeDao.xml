@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iotek.dao.ResumeDao">
+    <insert id="addResume">
+        INSERT  INTO T_RESUME VALUES (RESUME_SEQ.nextval,#{re_name},#{re_sex},#{re_age},#{re_nation},#{re_hometown},
+        #{re_marry},#{re_polity},#{re_major},#{re_school},#{re_phone},#{re_addr},#{re_post},#{re_email},#{re_sop},#{re_edubg},
+        #{re_sel},#{re_user_id})
+    </insert>
+    <update id="updateResume">
+        UPDATE T_RESUME SET RE_NAME=#{re_name},RE_SEX=#{re_sex},RE_AGE=#{re_age},RE_NATION=#{re_nation},re_hometown=#{re_hometown},
+        re_marry=#{re_marry},re_polity=#{re_polity},re_major=#{re_major},re_school=#{re_school},re_phone=#{re_phone},
+        re_addr=#{re_addr},re_post=#{re_post},re_email=#{re_email},re_sop=#{re_sop},re_edubg=#{re_edubg},re_sel=#{re_sel}
+        where re_user_id=#{re_user_id}
+    </update>
+    <delete id="delResume">
+        DELETE FROM T_RESUME where RE_ID=#{id}
+    </delete>
+    <select id="getResumeByUid" resultType="com.iotek.model.Resume">
+        SELECT * from T_RESUME where RE_USER_ID=#{user_id}
+    </select>
+    <select id="getResumeById" resultType="com.iotek.model.Resume">
+        SELECT * from T_RESUME where RE_ID=#{id}
+    </select>
+    <select id="getAllResume" resultType="com.iotek.model.Resume">
+        SELECT * FROM  T_RESUME WHERE
+    </select>
+</mapper>
