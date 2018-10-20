@@ -49,4 +49,33 @@ public class ResumeController {
             return "addresume";
         }
     }
+    @RequestMapping("updatere")
+    private String updatere(HttpServletRequest request, HttpSession session, HttpServletResponse response)throws Exception{
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        User user= (User) session.getAttribute("u");
+        Resume resume=new Resume(request.getParameter("re_name"),request.getParameter("re_sex"),Integer.parseInt(request.getParameter("re_age")),
+                request.getParameter("re_nation"),request.getParameter("re_hometown"),request.getParameter("re_marry"),
+                request.getParameter("re_polity"),request.getParameter("re_major"),request.getParameter("re_school"),
+                Integer.parseInt(request.getParameter("re_phone")),request.getParameter("re_addr"),Integer.parseInt(request.getParameter("re_post")),
+                request.getParameter("re_email"),request.getParameter("re_sop"),request.getParameter("re_edubg"),
+                request.getParameter("re_sel"),user.getUser_id());
+        if(resumeService.updateResume(resume)){
+            return "redirect:/showresume";
+        }else{
+            request.setAttribute("upresu", "修改失败");
+            return "updateres";
+        }
+    }
+    @RequestMapping("delresume")
+    private String delresume(HttpServletRequest request, HttpSession session, HttpServletResponse response)throws Exception{
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        Resume resume= (Resume) session.getAttribute("resume");
+        if(resumeService.delResume(resume.getRe_id())){
+            return "ad";
+        }else {
+            return "redirect:/showresume";
+        }
+    }
 }

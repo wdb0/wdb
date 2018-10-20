@@ -71,5 +71,11 @@
         <td colspan="3"><c:out value="${sessionScope.resume.re_sel}"/></td>
     </tr>
 </table>
+<form action="updateres">
+    <input type="submit" value="修改">
+</form>
+<form action="delresume">
+    <input type="submit" value="删除">
+</form>
 </body>
 </html>

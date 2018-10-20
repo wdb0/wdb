@@ -40,7 +40,7 @@ public class UserController {
                 response.addCookie(cookie);
                 response.addCookie(cookie1);
             }
-            return "ad";
+            return "redirect:/pagingad?currentPage=1";
         }else {
             return "../../index";
         }
@@ -66,7 +66,7 @@ public class UserController {
                 session.setAttribute("u",user);
                 session.setAttribute("name",username);
                 session.setAttribute("pass",userpass);
-                return "ad";
+                return "redirect:/pagingad?currentPage=1";
         }else {
             return "../../index";
         }

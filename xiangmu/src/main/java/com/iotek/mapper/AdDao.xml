@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iotek.dao.AdDao">
+    <insert id="addAd">
+        INSERT into T_AD VALUES (AD_SEQ.nextval,#{ad_job},#{ad_company},#{ad_workplace},#{ad_money},#{ad_time},#{ad_specworkplace},
+        #{ad_tenure},#{ad_duty},#{ad_department},#{ad_compro},#{ad_welfare},#{ad_state},#{ad_name})
+    </insert>
+    <update id="update">
+        UPDATE T_AD SET AD_JOB=#{ad_job},ad_company=#{ad_company},ad_workplace=#{ad_workplace},ad_money=#{ad_money},
+        ad_time=#{ad_time},ad_specworkplace=#{ad_specworkplace},ad_tenure=#{ad_tenure},ad_duty=#{ad_duty},ad_department=#{ad_department},
+        ad_compro=#{ad_compro},ad_welfare=#{ad_welfare},ad_name=#{ad_name}
+        where ad_id=#{ad_id}
+    </update>
+    <delete id="delAd">
+        DELETE FROM T_AD WHERE AD_ID=#{id}
+    </delete>
+    <select id="getAdByLimit" resultType="com.iotek.model.Ad">
+         SELECT * FROM (select g.*,rownum rn from t_ad g) where rn between #{currentPage} and #{pageSize}
+    </select>
+    <select id="getAdById" resultType="com.iotek.model.Ad">
+        SELECT * FROM T_AD WHERE AD_ID=#{id}
+    </select>
+    <select id="getAllAd" resultType="com.iotek.model.Ad">
+        SELECT * FROM T_AD
+    </select>
+    <select id="getAdByState" resultType="com.iotek.model.Ad">
+        SELECT * FROM T_AD where AD_STATE=#{state}
+    </select>
+    <select id="getAdByLimitAndState" resultType="com.iotek.model.Ad">
+        SELECT * FROM (select g.*,rownum rn from t_ad g where g.AD_STATE=#{state}) where rn between #{currentPage} and #{pageSize}
+    </select>
+
+</mapper>
