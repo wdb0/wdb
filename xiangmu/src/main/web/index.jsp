@@ -32,7 +32,7 @@
             </tr>
             <tr>
                 <td><input type="submit" value="登陆"></td>
-                <td><a href="CheckServlet">自动登陆</a></td>
+                <td><a href="CheckSer+vlet">自动登陆</a></td>
                 <td><a href="register1">立即注册</a></td>
             </tr>
         </table>
