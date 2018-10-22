@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iotek.dao.DeliverDao">
+    <insert id="addDeliver">
+        INSERT INTO t_deliver VALUES (DELIVER_SEQ.nextval,#{de_user_id},#{de_ad_id},#{de_state})
+    </insert>
+    <update id="updateDeliver">
+        UPDATE T_DELIVER SET DE_USER_ID=#{de_user_id},de_ad_id=#{de_ad_id},de_state=#{de_state} where de_id=#{de_id}
+    </update>
+    <select id="getAllDeliver" resultType="com.iotek.model.Deliver">
+        SELECT * FROM T_DELIVER
+    </select>
+    <select id="getDeliverByAdId" resultType="com.iotek.model.Deliver">
+        SELECT * FROM T_DELIVER where DE_AD_ID=#{ad_id}
+    </select>
+    <select id="getDeliverByAdIdAndLimit" resultType="com.iotek.model.Deliver">
+        SELECT * FROM (select g.*,rownum rn from T_DELIVER g where g.DE_AD_ID=#{ad_id}) where rn between #{currentPage} and #{pageSize}
+    </select>
+    <select id="getDeliverByStateAndLimit" resultType="com.iotek.model.Deliver">
+        SELECT * FROM (select g.*,rownum rn from T_DELIVER g where g.DE_STATE=#{state}) where rn between #{currentPage} and #{pageSize}
+    </select>
+    <select id="getDeliverByUserId" resultType="com.iotek.model.Deliver">
+        SELECT * FROM T_DELIVER where DE_USER_ID=#{user_id}
+    </select>
+    <select id="getDeliverByUserIdAndLimit" resultType="com.iotek.model.Deliver">
+        SELECT * FROM (select g.*,rownum rn from T_DELIVER g where g.DE_USER_ID=#{user_id}) where rn between #{currentPage} and #{pageSize}
+    </select>
+</mapper>

@@ -43,6 +43,11 @@
             </tr>
         </c:forEach>
     </table>
+    <c:if test="${sessionScope.totalPages!=0}">
+        <c:forEach  var="t" begin="1" end="${sessionScope.totalPages}">
+            <a href="pagingad?currentPage=${t}">${t}</a>
+        </c:forEach>
+    </c:if>
 </c:if>
 <c:if test="${sessionScope.ads.size()==0}">
     <c:out value="暂无招聘信息,请过段时间来查看"></c:out>

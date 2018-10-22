@@ -16,6 +16,14 @@
     <title>Title</title>
 </head>
 <body>
+<h4 style="color: red">
+    <%
+        String str = (String) request.getAttribute("faildeliver");
+        if (str!=null){
+            out.print(str);
+        }
+    %>
+</h4>
 <form action="addres">
 <table cellspacing="0"  border="1">
     <tr>

@@ -27,8 +27,8 @@ public class AdController {
         int currentPage = Integer.parseInt(request.getParameter("currentPage"));
         int totalRows = adService.getAdByState(1).size();
         int totalPages = DoPage.getTotalPages(totalRows);
-        List<Ad> goods = adService.getAdByLimitAndState(1,currentPage,PAGESIZE);
-        session.setAttribute("ads",goods);
+        List<Ad> ads = adService.getAdByLimitAndState(1,currentPage,PAGESIZE);
+        session.setAttribute("ads",ads);
         session.setAttribute("totalPages",totalPages);
         return "ad";
     }

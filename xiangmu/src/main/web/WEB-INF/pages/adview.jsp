@@ -17,7 +17,7 @@
     <title>Title</title>
 </head>
 <body>
-<form>
+<form action="adddeliver">
     <table border="1">
         <tr>
             <td><c:out value="${sessionScope.ad.ad_job}"></c:out></td>
@@ -51,7 +51,16 @@
             </td>
         </tr>
     </table>
+    <input type="hidden" name="ad_id" value="${sessionScope.ad.ad_id}">
     <input type="submit" value="申请">
 </form>
+<h4 style="color: red">
+    <%
+        String str = (String) request.getAttribute("updeliver");
+        if (str!=null){
+            out.print(str);
+        }
+    %>
+</h4>
 </body>
 </html>

@@ -10,6 +10,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * Created by WDB1 on 2018/10/19.
@@ -106,4 +107,26 @@ public class UserController {
                 response.getWriter().write("用户名为空");
             }
         }
+    @RequestMapping("/CheckadmServlet")
+    public void CheckadmServlet(HttpServletRequest request, HttpSession session, HttpServletResponse response)throws Exception{
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        String name=request.getParameter("user");
+        String pass=request.getParameter("pass");
+        if(name!=""&&pass!="") {
+            if (name.equals("admin")&& pass.equals("admin")) {
+                response.getWriter().write("成功");
+            }else {
+                response.getWriter().write("登陆失败");
+            }
+        }else{
+            response.getWriter().write("登陆失败");
+        }
+    }
+    @RequestMapping("/LogadmServlet")
+    public String LogadmServlet(HttpServletRequest request, HttpSession session, HttpServletResponse response)throws Exception{
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        return "adminfo";
+    }
     }
