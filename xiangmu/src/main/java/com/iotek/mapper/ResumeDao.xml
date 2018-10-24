@@ -22,6 +22,6 @@
         SELECT * from T_RESUME where RE_ID=#{id}
     </select>
     <select id="getAllResume" resultType="com.iotek.model.Resume">
-        SELECT * FROM  T_RESUME WHERE
+        SELECT * FROM  T_RESUME
     </select>
 </mapper>

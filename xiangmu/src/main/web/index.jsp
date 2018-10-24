@@ -38,5 +38,8 @@
         </table>
     </div>
 </form>
+<form action="adminjsp">
+    <input type="submit" value="管理员登陆">
+</form>
 </body>
 </html>

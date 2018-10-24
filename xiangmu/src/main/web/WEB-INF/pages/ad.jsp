@@ -18,9 +18,16 @@
 </head>
 <body>
 <c:out value="${sessionScope.u.user_name}"></c:out>
+<c:if test="${sessionScope.ivnum!=0}">
+    <a href="pagingnewinterview?currentPage=1"><c:out value="你有${sessionScope.ivnum}条新信息"></c:out></a>
+</c:if>
+<c:if test="${sessionScope.ivnum==0}">
+    <a href="paginginterview?currentPage=1"><c:out value="查看信息"></c:out></a>
+</c:if>
 <form action="showresume">
     <input type="submit" value="查看个人简历">
 </form>
+    <a href="pagingdeliver?currentPage=1"> <input type="button" value="查看已投简历"></a>
 <c:if test="${sessionScope.ads.size()!=0}">
     <table>
         <p>目前已有的招聘信息</p>

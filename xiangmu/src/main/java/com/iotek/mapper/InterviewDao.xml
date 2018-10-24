@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iotek.dao.InterviewDao">
+    <insert id="addInterview">
+        insert into T_INTERVIEW values (INTERVIEW_SEQ.nextval,#{iv_view},#{iv_time},#{iv_de_id},#{iv_state},#{iv_user_id});
+    </insert>
+    <update id="updateInterview">
+        UPDATE T_INTERVIEW SET IV_VIEW=#{iv_view},iv_time=#{iv_time},iv_de_id=#{iv_de_id}，iv_state=#{iv_state},iv_user_id=#{iv_user_id} where iv_id=#{iv_id}
+    </update>
+    <delete id="delInterview">
+        DELETE FROM T_INTERVIEW where IV_ID=#{id}
+    </delete>
+    <select id="getAllInterview" resultType="com.iotek.model.Interview">
+        SELECT * FROM T_INTERVIEW
+    </select>
+    <select id="getInterviewById" resultType="com.iotek.model.Interview">
+        SELECT * FROM T_INTERVIEW where IV_ID=#{id}
+    </select>
+    <select id="getInterViewBydeid" resultType="com.iotek.model.Interview">
+        SELECT * FROM T_INTERVIEW WHERE IV_DE_ID=#{de_id}
+    </select>
+    <select id="getInterviewByState" resultType="com.iotek.model.Interview">
+        SELECT * FROM T_INTERVIEW WHERE IV_STATE=#{state}
+    </select>
+    <select id="getInterviewByLimit" resultType="com.iotek.model.Interview">
+         SELECT * FROM (select g.*,rownum rn from T_INTERVIEW g) where rn between #{currentPage} and #{pageSize}
+    </select>
+    <select id="getInterviewByStateAndLimit" resultType="com.iotek.model.Interview">
+        SELECT * FROM (select g.*,rownum rn from T_INTERVIEW g WHERE IV_STATE=#{state}) where rn between #{currentPage} and #{pageSize}
+    </select>
+    <select id="getInterviewByUserId" resultType="com.iotek.model.Interview">
+        SELECT * FROM T_INTERVIEW where iv_user_id=#{user_id}
+    </select>
+    <select id="getInterviewByUserIdAndLimit" resultType="com.iotek.model.Interview">
+        SELECT * FROM (select g.*,rownum rn from T_INTERVIEW g WHERE IV_USER_ID=#{user_id}) where rn between #{currentPage} and #{pageSize}
+    </select>
+    <select id="getInterviewByUserIdANdStateAndLimit" resultType="com.iotek.model.Interview">
+        SELECT * FROM (select g.*,rownum rn from T_INTERVIEW g WHERE IV_STATE=#{state} and  IV_USER_ID=#{user_id}) where rn between #{currentPage} and #{pageSize}
+    </select>
+    <select id="getInterviewByUserIdANdState" resultType="com.iotek.model.Interview">
+        SELECT * FROM T_INTERVIEW where IV_STATE=#{state} and iv_user_id=#{user_id}
+    </select>
+</mapper>

@@ -12,6 +12,8 @@ public interface DeliverDao {
     boolean addDeliver(Deliver deliver);
     boolean updateDeliver(Deliver deliver);
     List<Deliver> getAllDeliver();
+    Deliver getDeliverById(int id);
+    List<Deliver> getDeliverByLimit(HashMap<String, Object> hashMap);
     List<Deliver> getDeliverByAdId(int ad_id);
     List<Deliver> getDeliverByAdIdAndLimit(HashMap<String, Object> hashMap);
     List<Deliver> getDeliverByStateAndLimit(HashMap<String, Object> hashMap);

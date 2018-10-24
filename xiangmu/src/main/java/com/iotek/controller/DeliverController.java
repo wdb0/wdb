@@ -1,7 +1,10 @@
 package com.iotek.controller;
 
+import com.iotek.model.Ad;
 import com.iotek.model.Deliver;
+import com.iotek.model.Resume;
 import com.iotek.model.User;
+import com.iotek.service.AdService;
 import com.iotek.service.DeliverService;
 import com.iotek.service.ResumeService;
 import com.iotek.utils.DoPage;
@@ -24,6 +27,8 @@ public class DeliverController {
     private DeliverService deliverService;
     @Resource
     private ResumeService resumeService;
+    @Resource
+    private AdService adService;
     @RequestMapping("adddeliver")
     private String adddeliver(HttpServletRequest request, HttpSession session, HttpServletResponse response) throws Exception{
         request.setCharacterEncoding("UTF-8");
@@ -33,7 +38,7 @@ public class DeliverController {
             int ad_id=Integer.parseInt(request.getParameter("ad_id"));
             Deliver deliver=new Deliver(user.getUser_id(),ad_id,0);
             if(deliverService.addDeliver(deliver)){
-                return "pagingdeliver?currentPage=1";
+                return "redirect:/pagingdeliver?currentPage=1";
             }else {
                 request.setAttribute("updeliver", "申请失败");
                 return "adview";
@@ -54,6 +59,51 @@ public class DeliverController {
         List<Deliver> delivers = deliverService.getDeliverByUserIdAndLimit(user.getUser_id(),currentPage,PAGESIZE);
         session.setAttribute("delivers",delivers);
         session.setAttribute("totalPages",totalPages);
+        List<Ad> ads=adService.getAllAd();
+        session.setAttribute("deads",ads);
         return "deliverview";
+    }
+    @RequestMapping("showdeliver")
+    private String showdeliver(HttpServletRequest request, HttpSession session, HttpServletResponse response)throws Exception{
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        int de_id=Integer.parseInt(request.getParameter("deliverid"));
+        Deliver deliver=deliverService.getDeliverById(de_id);
+        Ad ad=adService.getAdById(deliver.getDe_ad_id());
+        session.setAttribute("dad",ad);
+        return "deliverinfo";
+    }
+    @RequestMapping("pagingadmdeliver")
+    private String pagingadmdeliver(HttpServletRequest request, HttpSession session, HttpServletResponse response) throws Exception{
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+        int totalRows =deliverService.getAllDeliver().size();
+        int totalPages = DoPage.getTotalPages(totalRows);
+        List<Deliver> delivers = deliverService.getDeliverByLimit(currentPage,PAGESIZE);
+        session.setAttribute("admdelivers",delivers);
+        session.setAttribute("totalPages",totalPages);
+        List<Ad> ads=adService.getAllAd();
+        session.setAttribute("admads",ads);
+        List<Resume> resumes=resumeService.getAllResume();
+        session.setAttribute("admresumes",resumes);
+        return "admdeliver";
+    }
+    @RequestMapping("admdeview")
+    private String admdeview(HttpServletRequest request, HttpSession session, HttpServletResponse response) throws Exception{
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        int ad_id=Integer.parseInt(request.getParameter("admad_id"));
+        int re_id=Integer.parseInt(request.getParameter("admre_id"));
+        int de_id=Integer.parseInt(request.getParameter("admde_id"));
+        Deliver deliver=deliverService.getDeliverById(de_id);
+        deliver.setDe_state(1);
+        deliverService.updateDeliver(deliver);
+        Ad ad=adService.getAdById(ad_id);
+        Resume resume=resumeService.getResumeById(re_id);
+        session.setAttribute("admde",deliver);
+        session.setAttribute("admad",ad);
+        session.setAttribute("admre",resume);
+        return "admdeliverview";
     }
 }

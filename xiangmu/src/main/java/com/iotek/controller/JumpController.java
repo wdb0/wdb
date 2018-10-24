@@ -17,4 +17,12 @@ public class JumpController {
     public String updateres()throws Exception{
         return "updateres";
     }
+    @RequestMapping("/adminjsp")
+    public String admin()throws Exception{
+        return "admin";
+    }
+    @RequestMapping("/addinterview")
+    public String addinterview()throws Exception{
+        return "addinterview";
+    }
 }

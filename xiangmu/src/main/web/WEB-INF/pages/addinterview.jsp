@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: WDB1
-  Date: 2018/9/16
-  Time: 16:16
+  Date: 2018/10/23
+  Time: 20:28
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -16,6 +16,10 @@
     <title>Title</title>
 </head>
 <body>
-<a href="pagingadmdeliver?currentPage=1"><input type="button" value="查看投递的简历"></a>
+<form action="addiv">
+    内容：<textarea onKeyDown="if(value.length>300) value=value.substr(0,300)"   style="width:435px;height:150px;resize:none" name="view" required></textarea><br/>
+    时间：<input type="datetime-local" min="" name="time" required>
+    <input type="submit" value="发送">
+</form>
 </body>
 </html>

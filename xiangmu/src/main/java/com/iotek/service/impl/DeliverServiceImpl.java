@@ -28,6 +28,17 @@ public class DeliverServiceImpl implements DeliverService {
         return deliverDao.getAllDeliver();
     }
 
+    public Deliver getDeliverById(int id) {
+        return deliverDao.getDeliverById(id);
+    }
+
+    public List<Deliver> getDeliverByLimit(int currentPage, int pageSize) {
+        HashMap<String, Object> map = new HashMap();
+        map.put("currentPage", (currentPage-1)*pageSize);
+        map.put("pageSize", currentPage*pageSize);
+        return deliverDao.getDeliverByLimit(map);
+    }
+
     public List<Deliver> getDeliverByAdId(int ad_id) {
         return deliverDao.getDeliverByAdId(ad_id);
     }
