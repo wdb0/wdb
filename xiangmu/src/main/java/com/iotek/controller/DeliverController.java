@@ -1,12 +1,7 @@
 package com.iotek.controller;
 
-import com.iotek.model.Ad;
-import com.iotek.model.Deliver;
-import com.iotek.model.Resume;
-import com.iotek.model.User;
-import com.iotek.service.AdService;
-import com.iotek.service.DeliverService;
-import com.iotek.service.ResumeService;
+import com.iotek.model.*;
+import com.iotek.service.*;
 import com.iotek.utils.DoPage;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +21,11 @@ public class DeliverController {
     @Resource
     private DeliverService deliverService;
     @Resource
+    private OfferService offerService;
+    @Resource
     private ResumeService resumeService;
+    @Resource
+    private InterviewService interviewService;
     @Resource
     private AdService adService;
     @RequestMapping("adddeliver")
@@ -101,6 +100,10 @@ public class DeliverController {
         deliverService.updateDeliver(deliver);
         Ad ad=adService.getAdById(ad_id);
         Resume resume=resumeService.getResumeById(re_id);
+        Interview interview=interviewService.getInterViewBydeid(de_id);
+        Offer offer=offerService.getOfferByDeId(de_id);
+        session.setAttribute("admof",offer);
+        session.setAttribute("admiv",interview);
         session.setAttribute("admde",deliver);
         session.setAttribute("admad",ad);
         session.setAttribute("admre",resume);

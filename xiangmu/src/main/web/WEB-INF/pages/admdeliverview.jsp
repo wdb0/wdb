@@ -104,8 +104,20 @@
         <td colspan="3"><c:out value="${sessionScope.admre.re_sel}"/></td>
     </tr>
 </table>
-<form action="addinterview">
-    <input type="submit" value="发送面试邀请">
-</form>
+<c:if test="${sessionScope.admiv==null}">
+    <form action="addinterview">
+        <input type="submit" value="发送面试邀请">
+    </form>
+</c:if>
+<c:if test="${sessionScope.admiv!=null}">
+    <c:if test="${sessionScope.admof==null}">
+        <form action="addoffer">
+            <input type="submit" value="录用">
+        </form>
+    </c:if>
+    <c:if test="${sessionScope.admof!=null}">
+        <c:out value="已经录用该用户"></c:out>
+    </c:if>
+</c:if>
 </body>
 </html>

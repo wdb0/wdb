@@ -19,10 +19,16 @@
 <body>
 <c:out value="${sessionScope.u.user_name}"></c:out>
 <c:if test="${sessionScope.ivnum!=0}">
-    <a href="pagingnewinterview?currentPage=1"><c:out value="你有${sessionScope.ivnum}条新信息"></c:out></a>
+    <a href="pagingnewinterview?currentPage=1"><c:out value="你有${sessionScope.ivnum}条新面试邀请"></c:out></a>
 </c:if>
 <c:if test="${sessionScope.ivnum==0}">
-    <a href="paginginterview?currentPage=1"><c:out value="查看信息"></c:out></a>
+    <a href="paginginterview?currentPage=1"><c:out value="查看全部面试邀请"></c:out></a>
+</c:if>
+<c:if test="${sessionScope.ofnum!=0}">
+    <a href="pagingnewoffer?currentPage=1"><c:out value="你有${sessionScope.ofnum}个新offer"></c:out></a>
+</c:if>
+<c:if test="${sessionScope.ofnum==0}">
+    <a href="pagingoffer?currentPage=1"><c:out value="查看全部offer"></c:out></a>
 </c:if>
 <form action="showresume">
     <input type="submit" value="查看个人简历">

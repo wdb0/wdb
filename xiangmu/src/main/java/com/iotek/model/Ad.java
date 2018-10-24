@@ -46,6 +46,22 @@ public class Ad implements Serializable {
         this.ad_state = ad_state;
     }
 
+    public Ad(String ad_name, String ad_job, String ad_company, String ad_workplace, String ad_money, String ad_time, String ad_specworkplace, String ad_tenure, String ad_duty, String ad_department, String ad_compro, String ad_welfare, Integer ad_state) {
+        this.ad_name = ad_name;
+        this.ad_job = ad_job;
+        this.ad_company = ad_company;
+        this.ad_workplace = ad_workplace;
+        this.ad_money = ad_money;
+        this.ad_time = ad_time;
+        this.ad_specworkplace = ad_specworkplace;
+        this.ad_tenure = ad_tenure;
+        this.ad_duty = ad_duty;
+        this.ad_department = ad_department;
+        this.ad_compro = ad_compro;
+        this.ad_welfare = ad_welfare;
+        this.ad_state = ad_state;
+    }
+
     public Integer getAd_id() {
         return ad_id;
     }

@@ -28,6 +28,12 @@ public class InterviewController {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         Deliver deliver= (Deliver) session.getAttribute("admde");
+        System.out.println(deliver);
+        String view=request.getParameter("view");
+        String time=request.getParameter("time");
+        System.out.println(time);
+        Interview interview=new Interview(view,time,deliver.getDe_id(),0,deliver.getDe_user_id());
+        interviewService.addInterview(interview);
         return "redirect:/pagingadmdeliver?currentPage=1";
     }
     @RequestMapping("paginginterview")
@@ -58,6 +64,6 @@ public class InterviewController {
         }
         session.setAttribute("interviews",interviews);
         session.setAttribute("totalPages",totalPages);
-        return "message";
+        return "newmessage";
     }
 }

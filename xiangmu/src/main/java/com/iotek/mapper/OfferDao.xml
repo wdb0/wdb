@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iotek.dao.OfferDao">
+    <insert id="addOffer">
+        insert into T_OFFER VALUES (OFFER_SEQ.nextval,#{of_view},#{of_user_id},#{of_state},#{of_de_id})
+    </insert>
+    <update id="update">
+      UPDATE T_OFFER SET OF_VIEW=#{of_view},of_user_id=#{of_user_id},of_state=#{of_state},of_de_id=#{of_de_id} where of_id=#{of_id}
+    </update>
+    <select id="getAllOffer" resultType="com.iotek.model.Offer">
+        SELECT * FROM T_OFFER
+    </select>
+    <select id="getOfferByDeId" resultType="com.iotek.model.Offer">
+        SELECT * FROM T_OFFER where OF_DE_ID=#{de_id}
+    </select>
+    <select id="getOfferByUserId" resultType="com.iotek.model.Offer">
+        SELECT  * FROM T_OFFER where OF_USER_ID=#{user_id}
+    </select>
+    <select id="getOfferByUserIdAndLimit" resultType="com.iotek.model.Offer">
+         SELECT * FROM (select g.*,rownum rn from T_OFFER g where g.OF_USER_ID=#{user_id}) where rn between #{currentPage} and #{pageSize}
+    </select>
+    <select id="getOfferByUserIdAndState" resultType="com.iotek.model.Offer">
+        SELECT * FROM T_OFFER where OF_USER_ID=#{user_id} and of_state=#{state}
+    </select>
+    <select id="getOfferByUserIdAndStateAndLimit" resultType="com.iotek.model.Offer">
+         SELECT * FROM (select g.*,rownum rn from T_OFFER g where g.OF_USER_ID=#{user_id} and g.of_state=#{state}) where rn between #{currentPage} and #{pageSize}
+    </select>
+</mapper>
