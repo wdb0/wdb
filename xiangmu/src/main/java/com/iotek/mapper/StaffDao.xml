@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iotek.dao.StaffDao">
+    <insert id="addStaff">
+        INSERT into T_STAFF VALUES (STAFF_SEQ.nextval,#{sf_name},#{sf_pass},#{sf_sex},#{sf_age},
+        #{sf_phone},#{sf_mail},#{sf_dp_id},#{sf_job_id},#{sf_money},#{sf_state},#{sf_addr})
+    </insert>
+    <update id="updtaeStaff">
+        UPDATE T_STAFF set SF_NAME=#{sf_name},sf_pass=#{sf_pass},sf_sex=#{sf_sex},sf_age=#{sf_age},
+        sf_phone=#{sf_phone},sf_mail=#{sf_mail},sf_dp_id=#{sf_dp_id},sf_job_id=#{sf_job_id}，sf_money=#{sf_money},
+        sf_state=#{sf_state},sf_addr=#{sf_addr} where sf_id=#{sf_id}
+    </update>
+    <delete id="delStaff">
+        DELETE FROM T_STAFF where SF_ID=#{id}
+    </delete>
+    <select id="getAllStaff" resultType="com.iotek.model.Staff">
+        SELECT * FROM T_STAFF
+    </select>
+    <select id="getStaffById" resultType="com.iotek.model.Staff">
+        SELECT * FROM T_STAFF where SF_ID=#{id}
+    </select>
+    <select id="getStaffByDpidAndJobid" resultType="com.iotek.model.Staff">
+        SELECT * FROM T_STAFF where SF_DP_ID=#{dp_id} and sf_job_id=#{job_id}
+    </select>
+    <select id="getStaffByState" resultType="com.iotek.model.Staff">
+        SELECT * FROM T_STAFF WHERE SF_STATE=#{state}
+    </select>
+</mapper>

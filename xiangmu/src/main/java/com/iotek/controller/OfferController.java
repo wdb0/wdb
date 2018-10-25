@@ -1,8 +1,7 @@
 package com.iotek.controller;
 
-import com.iotek.model.Deliver;
-import com.iotek.model.Offer;
-import com.iotek.model.User;
+import com.iotek.model.*;
+import com.iotek.service.DepartmentService;
 import com.iotek.service.OfferService;
 import com.iotek.utils.DoPage;
 import org.springframework.stereotype.Controller;
@@ -22,11 +21,15 @@ public class OfferController {
     private final int PAGESIZE=5;
     @Resource
     private OfferService offerService;
+    @Resource
+    private DepartmentService departmentService;
     @RequestMapping("addof")
-    private String addoffer(HttpServletRequest request, HttpSession session, HttpServletResponse response)throws Exception{
+    private String addof(HttpServletRequest request, HttpSession session, HttpServletResponse response)throws Exception{
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
-        String view=request.getParameter("view");
+        Staff staff= (Staff) session.getAttribute("admstaff");
+        String v= (String) session.getAttribute("staffview");
+        String view="你已被我司录用，你的员工账号为："+staff.getSf_name()+",密码为:"+staff.getSf_pass()+",注意事项："+v;
         Deliver deliver= (Deliver) session.getAttribute("admde");
         Offer offer=new Offer(view,deliver.getDe_user_id(),0,deliver.getDe_id());
         offerService.addOffer(offer);
@@ -61,5 +64,13 @@ public class OfferController {
         session.setAttribute("newoffers",offers);
         session.setAttribute("totalPages",totalPages);
         return "newoffer";
+    }
+    @RequestMapping("/addoffer")
+    public String addoffer(HttpServletRequest request, HttpSession session, HttpServletResponse response)throws Exception{
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        List<Department> departments=departmentService.getAllDepartment();
+        session.setAttribute("departments",departments);
+        return "addoffer";
     }
 }

@@ -25,10 +25,6 @@ public class JumpController {
     public String addinterview()throws Exception{
         return "addinterview";
     }
-    @RequestMapping("/addoffer")
-    public String addoffer()throws Exception{
-        return "addoffer";
-    }
     @RequestMapping("/addad")
     public String addad()throws Exception{
         return "addad";
