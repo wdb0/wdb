@@ -80,7 +80,7 @@ public class AdController {
         response.setContentType("text/html;charset=UTF-8");
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Ad ad=new Ad(request.getParameter("ad_name"),request.getParameter("ad_job"),request.getParameter("ad_company"),request.getParameter("ad_workplace"),
-                request.getParameter("ad_money"),df.format(new Date()),request.getParameter("ad_specworkpalce"),request.getParameter("ad_tenure"),
+                request.getParameter("ad_money"),df.format(new Date()),request.getParameter("ad_specworkplace"),request.getParameter("ad_tenure"),
                 request.getParameter("ad_duty"),request.getParameter("ad_department"),request.getParameter("ad_compro"),request.getParameter("ad_welfare"),
                 0);
         System.out.println(ad);
@@ -107,5 +107,17 @@ public class AdController {
         Ad ad=adService.getAdById(adid);
         session.setAttribute("adminad",ad);
         return "admadve";
+    }
+    @RequestMapping("updatead")
+    private String updatead(HttpServletRequest request, HttpSession session, HttpServletResponse response)throws  Exception{
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        Ad a= (Ad) session.getAttribute("adminad");
+        Ad ad=new Ad(a.getAd_id(),request.getParameter("ad_name"),request.getParameter("ad_job"),request.getParameter("ad_company"),request.getParameter("ad_workplace"),
+                request.getParameter("ad_money"),a.getAd_time(),request.getParameter("ad_specworkplace"),request.getParameter("ad_tenure"),
+                request.getParameter("ad_duty"),request.getParameter("ad_department"),request.getParameter("ad_compro"),request.getParameter("ad_welfare"),
+                0);
+        adService.update(ad);
+        return "redirect:/pagingadmad?currentPage=1";
     }
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iotek.dao.JobDao">
+    <insert id="addJob">
+        INSERT into T_JOB VALUES (JOB_SEQ.nextval,#{job_name},#{job_dp_id},#{job_num})
+    </insert>
+    <update id="updateJob">
+        UPDATE T_JOB SET JOB_NAME=#{job_name},job_dp_id=#{job_dp_id},job_num=#{job_num} where job_id=#{job_id}
+    </update>
+    <delete id="delJob">
+        DELETE FROM T_JOB where JOB_ID=#{id}
+    </delete>
+    <select id="getAllJob" resultType="com.iotek.model.Job">
+        SELECT * FROM T_JOB
+    </select>
+    <select id="getJobByID" resultType="com.iotek.model.Job">
+        SELECT * FROM T_JOB where JOB_ID=#{id}
+    </select>
+    <select id="getJobByDpid" resultType="com.iotek.model.Job">
+        SELECT * FROM T_JOB WHERE JOB_DP_ID=#{dp_id}
+    </select>
+</mapper>

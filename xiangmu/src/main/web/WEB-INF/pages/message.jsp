@@ -23,7 +23,7 @@
             <c:if test="${i.iv_de_id==d.de_id}">
                 <c:forEach items="${sessionScope.ads}" var="ad">
                     <c:if test="${d.de_ad_id==ad.ad_id}">
-                        <c:out value="${ad.ad_company}发来面试邀请"></c:out>
+                        <c:out value="${ad.ad_company}发来面试邀请"></c:out><br/>
                     </c:if>
                 </c:forEach>
             </c:if>

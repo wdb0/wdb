@@ -17,6 +17,7 @@
     <title>Title</title>
 </head>
 <body>
+<form action="upad">
 <table border="1">
     <tr>
         <td><c:out value="${sessionScope.adminad.ad_job}"></c:out></td>
@@ -50,5 +51,8 @@
         </td>
     </tr>
 </table>
+    <input type="hidden" name="adid" value="${sessionScope.admin.ad_id}">
+    <input type="submit" value="修改">
+</form>
 </body>
 </html>
