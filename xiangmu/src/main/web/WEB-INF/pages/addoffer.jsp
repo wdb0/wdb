@@ -45,7 +45,7 @@
                });
 
            $("input[name='put']").click(function () {
-               if($("#department").val()=="--请选择--"||$("#job").val()=="--请选择--"){
+               if($("#department").val()=="--请选择--"||$("#job").val()=="--请选择--"||$("#job").val()==""){
                    alert("请选择职位")
                }else if($("#view").val()=="") {
                    alert("请填写报道时间和注意事项");

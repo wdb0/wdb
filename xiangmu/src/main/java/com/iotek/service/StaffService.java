@@ -16,4 +16,6 @@ public interface StaffService {
     Staff getStaffById(int id);
     List<Staff> getStaffByDpidAndJobid(int dp_id,int job_id);
     List<Staff> getStaffByState(int state);
+    Staff getStaffByNameAndPass(String sf_name,String sf_pass);
+    List<Staff> getStaffByLimit(int currentPage, int pageSize);
 }

@@ -3,12 +3,12 @@
 <mapper namespace="com.iotek.dao.StaffDao">
     <insert id="addStaff">
         INSERT into T_STAFF VALUES (STAFF_SEQ.nextval,#{sf_name},#{sf_pass},#{sf_sex},#{sf_age},
-        #{sf_phone},#{sf_mail},#{sf_dp_id},#{sf_job_id},#{sf_money},#{sf_state},#{sf_addr})
+        #{sf_phone},#{sf_mail},#{sf_dp_id},#{sf_job_id},#{sf_money},#{sf_state},#{sf_addr},#{sf_time})
     </insert>
     <update id="updtaeStaff">
         UPDATE T_STAFF set SF_NAME=#{sf_name},sf_pass=#{sf_pass},sf_sex=#{sf_sex},sf_age=#{sf_age},
         sf_phone=#{sf_phone},sf_mail=#{sf_mail},sf_dp_id=#{sf_dp_id},sf_job_id=#{sf_job_id}，sf_money=#{sf_money},
-        sf_state=#{sf_state},sf_addr=#{sf_addr} where sf_id=#{sf_id}
+        sf_state=#{sf_state},sf_addr=#{sf_addr},sf_time=#{sf_time} where sf_id=#{sf_id}
     </update>
     <delete id="delStaff">
         DELETE FROM T_STAFF where SF_ID=#{id}
@@ -24,5 +24,11 @@
     </select>
     <select id="getStaffByState" resultType="com.iotek.model.Staff">
         SELECT * FROM T_STAFF WHERE SF_STATE=#{state}
+    </select>
+    <select id="getStaffByNameAndPass" resultType="com.iotek.model.Staff">
+        SELECT * FROM T_STAFF WHERE SF_NAME=#{sf_name} and sf_pass=#{sf_pass}
+    </select>
+    <select id="getStaffByLimit" resultType="com.iotek.model.Staff">
+        SELECT * FROM (select g.*,rownum rn from T_STAFF g) where rn between #{currentPage} and #{pageSize}
     </select>
 </mapper>

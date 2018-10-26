@@ -2,8 +2,10 @@ package com.iotek.controller;
 
 import com.iotek.model.Department;
 import com.iotek.model.Job;
+import com.iotek.model.Staff;
 import com.iotek.service.DepartmentService;
 import com.iotek.service.JobService;
+import com.iotek.service.StaffService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,6 +23,8 @@ import java.util.List;
 public class JobController {
     @Resource
     private JobService jobService;
+    @Resource
+    private StaffService staffService;
     @Resource
     private DepartmentService departmentService;
     @RequestMapping("getjob")
@@ -77,7 +81,7 @@ public class JobController {
             jobService.delJob(job_id);
             return "redirect:/manjob";
         }else{
-            request.setAttribute("mj", "部门人数不为零无法删除");
+            request.setAttribute("managejob", "部门人数不为零无法删除");
             return "managejob";
         }
     }
@@ -96,5 +100,30 @@ public class JobController {
             session.setAttribute("upjob",job);
             return "updatejob";
         }
+    }
+    @RequestMapping("updajob")
+    private String updajob(HttpServletRequest request, HttpSession session, HttpServletResponse response)throws Exception{
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        int job_id=Integer.parseInt(request.getParameter("jobid"));
+        String job_name=request.getParameter("job_name");
+        Job job=jobService.getJobByID(job_id);
+        job.setJob_name(job_name);
+        jobService.updateJob(job);
+        return "redirect:/manjob";
+    }
+    @RequestMapping("updatestaffjob")
+    private String updatestaffjob(HttpServletRequest request, HttpSession session, HttpServletResponse response)throws Exception{
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        int sf_id=Integer.parseInt(request.getParameter("sf_id"));
+        Staff staff=staffService.getStaffById(sf_id);
+        session.setAttribute("staff_job",staff);
+        List<Job> jobs=jobService.getAllJob();
+        List<Department> departments=departmentService.getAllDepartment();
+        System.out.println(departments);
+        session.setAttribute("dp",departments);
+        session.setAttribute("job",jobs);
+        return "upsfjob";
     }
 }

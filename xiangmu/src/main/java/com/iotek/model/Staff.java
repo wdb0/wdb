@@ -18,11 +18,12 @@ public class Staff implements Serializable {
     private Integer sf_money;
     private Integer sf_state;
     private String sf_addr;
+    private String sf_time;
 
     public Staff() {
     }
 
-    public Staff(Integer sf_id, String sf_name, String sf_pass, String sf_sex, Integer sf_age, Integer sf_phone, String sf_mail, Integer sf_dp_id, Integer sf_job_id, Integer sf_money, Integer sf_state, String sf_addr) {
+    public Staff(Integer sf_id, String sf_name, String sf_pass, String sf_sex, Integer sf_age, Integer sf_phone, String sf_mail, Integer sf_dp_id, Integer sf_job_id, Integer sf_money, Integer sf_state, String sf_addr, String sf_time) {
         this.sf_id = sf_id;
         this.sf_name = sf_name;
         this.sf_pass = sf_pass;
@@ -35,9 +36,10 @@ public class Staff implements Serializable {
         this.sf_money = sf_money;
         this.sf_state = sf_state;
         this.sf_addr = sf_addr;
+        this.sf_time = sf_time;
     }
 
-    public Staff(String sf_name, String sf_pass, String sf_sex, Integer sf_age, Integer sf_phone, String sf_mail, Integer sf_dp_id, Integer sf_job_id, Integer sf_money, Integer sf_state, String sf_addr) {
+    public Staff(String sf_name, String sf_pass, String sf_sex, Integer sf_age, Integer sf_phone, String sf_mail, Integer sf_dp_id, Integer sf_job_id, Integer sf_money, Integer sf_state, String sf_addr, String sf_time) {
         this.sf_name = sf_name;
         this.sf_pass = sf_pass;
         this.sf_sex = sf_sex;
@@ -49,6 +51,7 @@ public class Staff implements Serializable {
         this.sf_money = sf_money;
         this.sf_state = sf_state;
         this.sf_addr = sf_addr;
+        this.sf_time = sf_time;
     }
 
     public Integer getSf_id() {
@@ -147,6 +150,14 @@ public class Staff implements Serializable {
         this.sf_addr = sf_addr;
     }
 
+    public String getSf_time() {
+        return sf_time;
+    }
+
+    public void setSf_time(String sf_time) {
+        this.sf_time = sf_time;
+    }
+
     @Override
     public String toString() {
         return "Staff{" +
@@ -162,6 +173,7 @@ public class Staff implements Serializable {
                 ", sf_money=" + sf_money +
                 ", sf_state=" + sf_state +
                 ", sf_addr='" + sf_addr + '\'' +
+                ", sf_time='" + sf_time + '\'' +
                 '}';
     }
 }

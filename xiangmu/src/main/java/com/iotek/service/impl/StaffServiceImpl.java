@@ -46,4 +46,18 @@ public class StaffServiceImpl implements StaffService {
     public List<Staff> getStaffByState(int state) {
         return staffDao.getStaffByState(state);
     }
+
+    public Staff getStaffByNameAndPass(String sf_name, String sf_pass) {
+        HashMap<String, Object> map = new HashMap();
+        map.put("sf_name",sf_name);
+        map.put("sf_pass",sf_pass);
+        return staffDao.getStaffByNameAndPass(map);
+    }
+
+    public List<Staff> getStaffByLimit(int currentPage, int pageSize) {
+        HashMap<String, Object> map = new HashMap();
+        map.put("currentPage", (currentPage-1)*pageSize);
+        map.put("pageSize", currentPage*pageSize);
+        return staffDao.getStaffByLimit(map);
+    }
 }

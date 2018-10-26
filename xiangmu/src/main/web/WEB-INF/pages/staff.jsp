@@ -1,9 +1,8 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: WDB1
   Date: 2018/10/26
-  Time: 8:59
+  Time: 11:02
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -17,11 +16,22 @@
     <title>Title</title>
 </head>
 <body>
-<form action="updajob">
-    <p>部门：<c:out value="${sessionScope.upjobdp.dp_department}"></c:out></p>
-    职位：<input type="text" name="job_name" value="${sessionScope.upjob.job_name}">
-    <input type="hidden" name="jobid" value="${sessionScope.upjob.job_id}">
-    <input type="submit" value="修改">
+<form action="loginstaff" method="post">
+    <div id="d1">
+        <table>
+            <tr>
+                <td>用户名：</td>
+                <td><input name="sf_name"/><br/></td>
+            </tr>
+            <tr>
+                <td>密码：</td>
+                <td><input type="password" name="sf_pass"/><br/></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="登陆"></td>
+            </tr>
+        </table>
+    </div>
 </form>
 </body>
 </html>
