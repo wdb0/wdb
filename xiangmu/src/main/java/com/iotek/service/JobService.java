@@ -2,6 +2,7 @@ package com.iotek.service;
 
 import com.iotek.model.Job;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -14,4 +15,5 @@ public interface JobService {
     List<Job> getAllJob();
     Job getJobByID(int id);
     List<Job> getJobByDpid(int dp_id);
+    Job getJobByDpidAndName(int dp_id,String job_name);
 }

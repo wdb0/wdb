@@ -2,6 +2,7 @@ package com.iotek.controller;
 
 import com.iotek.model.*;
 import com.iotek.service.DepartmentService;
+import com.iotek.service.JobService;
 import com.iotek.service.OfferService;
 import com.iotek.utils.DoPage;
 import org.springframework.stereotype.Controller;

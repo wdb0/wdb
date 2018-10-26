@@ -1,8 +1,8 @@
 package com.iotek.controller;
 
-import com.iotek.model.Deliver;
-import com.iotek.model.Resume;
-import com.iotek.model.Staff;
+import com.iotek.model.*;
+import com.iotek.service.DepartmentService;
+import com.iotek.service.JobService;
 import com.iotek.service.ResumeService;
 import com.iotek.service.StaffService;
 import org.springframework.stereotype.Controller;
@@ -22,6 +22,10 @@ public class StaffController {
     private StaffService staffService;
     @Resource
     private ResumeService resumeService;
+    @Resource
+    private DepartmentService departmentService;
+    @Resource
+    private JobService jobService;
     @RequestMapping("addstaff")
     private void addstaff(HttpServletRequest request, HttpSession session, HttpServletResponse response) throws Exception{
         request.setCharacterEncoding("UTF-8");
@@ -29,6 +33,12 @@ public class StaffController {
         Deliver deliver= (Deliver) session.getAttribute("admde");
         int dp_id=Integer.parseInt(request.getParameter("dp_id"));
         int job_id=Integer.parseInt(request.getParameter("job_id"));
+        Job job=jobService.getJobByID(job_id);
+        Department department=departmentService.getDepartmentById(dp_id);
+        job.setJob_num(job.getJob_num()+1);
+        jobService.updateJob(job);
+        department.setDp_num(department.getDp_num()+1);
+        departmentService.updateDepartment(department);
         int money=Integer.parseInt(request.getParameter("money"));
         String view=request.getParameter("view");
         Resume resume=resumeService.getResumeByUid(deliver.getDe_user_id());

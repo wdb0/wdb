@@ -16,4 +16,7 @@
     <select id="getDepartmentById" resultType="com.iotek.model.Department">
         SELECT * FROM T_DEPARTMENT where DP_ID=#{dp_id}
     </select>
+    <select id="getDepartmentByName" resultType="com.iotek.model.Department">
+        SELECT * FROM T_DEPARTMENT where DP_DEPARTMENT=#{name}
+    </select>
 </mapper>

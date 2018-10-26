@@ -31,8 +31,8 @@ public class JobController {
         List<Job> jobs=jobService.getJobByDpid(dp_id);
         return jobs;
     }
-    @RequestMapping("/managejob")
-    public String managejob(HttpServletRequest request, HttpSession session, HttpServletResponse response)throws Exception{
+    @RequestMapping("/manjob")
+    private String managejob(HttpServletRequest request, HttpSession session, HttpServletResponse response)throws Exception{
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         List<Job> jobs=jobService.getAllJob();
@@ -40,5 +40,61 @@ public class JobController {
         session.setAttribute("deps",departments);
         session.setAttribute("jbs",jobs);
         return "managejob";
+    }
+    @RequestMapping("checkjob")
+    private String checkjob(HttpServletRequest request, HttpSession session, HttpServletResponse response)throws Exception{
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        List<Department> departments=departmentService.getAllDepartment();
+        session.setAttribute("depts",departments);
+        return "addjob";
+    }
+    @RequestMapping("adjob")
+    private void adjob(HttpServletRequest request, HttpSession session, HttpServletResponse response)throws Exception{
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        int dp_id=Integer.parseInt(request.getParameter("dp_id"));
+        String job_name=request.getParameter("job_name");
+        Job j=jobService.getJobByDpidAndName(dp_id,job_name);
+        if(j==null) {
+            Job job = new Job(job_name, dp_id, 0);
+            if (jobService.addJob(job)) {
+                response.getWriter().write("成功");
+            } else {
+                response.getWriter().write("失败");
+            }
+        }else{
+            response.getWriter().write("该部门已有该职位");
+        }
+    }
+    @RequestMapping("deljob")
+    private String deljob(HttpServletRequest request, HttpSession session, HttpServletResponse response)throws Exception{
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        int job_id=Integer.parseInt(request.getParameter("jobid"));
+        Job job=jobService.getJobByID(job_id);
+        if(job.getJob_num()==0){
+            jobService.delJob(job_id);
+            return "redirect:/manjob";
+        }else{
+            request.setAttribute("mj", "部门人数不为零无法删除");
+            return "managejob";
+        }
+    }
+    @RequestMapping("upjob")
+    private String upjob(HttpServletRequest request, HttpSession session, HttpServletResponse response)throws Exception{
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        int job_id=Integer.parseInt(request.getParameter("jobid"));
+        Job job=jobService.getJobByID(job_id);
+        Department department=departmentService.getDepartmentById(job.getJob_dp_id());
+        if(job.getJob_num()!=0){
+            request.setAttribute("managejob", "部门中有在职员工，无法修改");
+            return "managejob";
+        }else{
+            session.setAttribute("upjobdp",department);
+            session.setAttribute("upjob",job);
+            return "updatejob";
+        }
     }
 }

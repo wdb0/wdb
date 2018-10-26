@@ -19,4 +19,7 @@
     <select id="getJobByDpid" resultType="com.iotek.model.Job">
         SELECT * FROM T_JOB WHERE JOB_DP_ID=#{dp_id}
     </select>
+    <select id="getJobByDpidAndName" resultType="com.iotek.model.Job">
+        SELECT * FROM T_JOB where JOB_DP_Id=#{dp_id} and job_name=#{job_name}
+    </select>
 </mapper>

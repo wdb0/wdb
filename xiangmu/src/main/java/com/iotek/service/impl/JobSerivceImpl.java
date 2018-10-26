@@ -6,6 +6,7 @@ import com.iotek.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -37,5 +38,12 @@ public class JobSerivceImpl implements JobService {
 
     public List<Job> getJobByDpid(int dp_id) {
         return jobDao.getJobByDpid(dp_id);
+    }
+
+    public Job getJobByDpidAndName(int dp_id, String job_name) {
+        HashMap<String, Object> map = new HashMap();
+        map.put("dp_id",dp_id);
+        map.put("job_name",job_name);
+        return jobDao.getJobByDpidAndName(map);
     }
 }

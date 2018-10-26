@@ -17,8 +17,8 @@
     <title>Title</title>
 </head>
 <body>
-<a href=""><input type="button" value="增加部门"></a>
-<a href=""><input type="button" value="增加职位"></a>
+<a href="adddp"><input type="button" value="增加部门"></a>
+<a href="checkjob"><input type="button" value="增加职位"></a>
 <table border="1">
     <tr>
         <td>部门</td>
@@ -44,11 +44,23 @@
                             <input type="hidden" name="jobid" value="${i.job_id}">
                             <input type="submit" value="删除">
                         </form>
+                        <form action="upjob">
+                            <input type="hidden" name="jobid" value="${i.job_id}">
+                            <input type="submit" value="修改">
+                        </form>
                     </td>
                 </tr>
             </c:if>
         </c:forEach>
     </c:forEach>
 </table>
+<h4 style="color: red">
+    <%
+        String str = (String) request.getAttribute("managejob");
+        if (str!=null){
+            out.print(str);
+        }
+    %>
+</h4>
 </body>
 </html>

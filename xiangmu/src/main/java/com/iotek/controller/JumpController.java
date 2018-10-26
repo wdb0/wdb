@@ -33,4 +33,8 @@ public class JumpController {
     public String upad()throws Exception{
         return "upad";
     }
+    @RequestMapping("/adddp")
+    public String addp()throws Exception{
+        return "adddp";
+    }
 }

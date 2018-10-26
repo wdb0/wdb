@@ -34,4 +34,8 @@ public class DepartmentServiceImpl implements DepartmentService {
     public Department getDepartmentById(int dp_id) {
         return departmentDao.getDepartmentById(dp_id);
     }
+
+    public Department getDepartmentByName(String name) {
+        return departmentDao.getDepartmentByName(name);
+    }
 }
